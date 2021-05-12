@@ -128,6 +128,7 @@ function updateTaps(taps) {
 function updateStorage(storage) {
     // console.log('storage updated');
     // console.log(storage);
+    qs('#storage_display').innerHTML = '';
     storage.forEach(beer => {
         //console.log(beer);
         const clone = qs('.storage').content.cloneNode(true);
