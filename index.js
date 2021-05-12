@@ -50,11 +50,11 @@ function updateQueue(queue) {
     });
 }
 function updateServing(serving) {
-    console.log('serving updated');
-    console.log(serving);
+    // console.log('serving updated');
+    // console.log(serving);
     qs('#serving_display').innerHTML = '';
     serving.forEach(order => {
-        console.log(order);
+        //console.log(order);
         const clone = qs('.serving').content.cloneNode(true);
 
         const id = order.id;
@@ -62,7 +62,7 @@ function updateServing(serving) {
         const hour = time.getHours();
         const mins = time.getMinutes();
         const content = order.order;
-        console.log(id, hour, mins, content);
+        //console.log(id, hour, mins, content);
 
         clone.querySelector('.id').textContent = `#${id.toString()}  `;
         clone.querySelector('.time').textContent = `${hour}:${mins}  `;
@@ -72,15 +72,79 @@ function updateServing(serving) {
 }
 function updateBartenders(bartenders) {
     // console.log('bartenders updated');
-    // console.log(bartenders);
+    //console.log(bartenders);
+    bartenders.forEach(bartender => {
+        //console.log(bartender);
+
+        const name = bartender.name;
+        const bartenderElem = qs(`#${name}`);
+        const status = bartender.status;
+        const doing = bartender.statusDetail;
+        const usingTap = (bartender.usingTap);
+        const serving = bartender.servingCustomer;
+
+        bartenderElem.querySelector('.status').textContent = `is ${status}`;
+        bartenderElem.querySelector('.doing').textContent = `Currently ${doing}`;
+        bartenderElem.querySelector('.usingTap').textContent = `Using tap ${usingTap} right now`;
+        bartenderElem.querySelector('.servingCustomer').textContent = `to serve cusomer ${serving}!`;
+    });
 }
 function updateTaps(taps) {
     // console.log('taps updated');
     // console.log(taps);
+    qs('#tap_display').innerHTML = '';
+    taps.forEach(tap => {
+        //console.log(tap);
+        const clone = qs('.tap').content.cloneNode(true);
+
+        const id = tap.id; // So there is no 'tap 0'
+        const brand = tap.beer;
+        const inUse = tap.inUse;
+        const level = ((tap.level / tap.capacity) * 100).toFixed(0);
+
+        //console.log(id, brand, inUse, level);
+
+        clone.querySelector('.beer').textContent = `${id} ${brand}`;
+        const thisTap = clone.querySelector('.tap_info');
+        const tapColor = tap.inUse ? 'lightgreen' : 'grey';
+        thisTap.style.backgroundColor = `${tapColor}`;
+        clone.querySelector('.level').textContent = `is at ${level}%`;
+        thisTap.style.width = `${level}%`;
+
+        qs("#tap_display").appendChild(clone);
+    })
 }
+
+
 function updateStorage(storage) {
     // console.log('storage updated');
     // console.log(storage);
+    storage.forEach(beer => {
+        //console.log(beer);
+        const clone = qs('.storage').content.cloneNode(true);
+
+        const name = beer.name;
+        const amount = beer.amount;
+        // const id = tap.id; // So there is no 'tap 0'
+        // const brand = tap.beer;
+        // const inUse = tap.inUse;
+        // const level = ((tap.level / tap.capacity) * 100).toFixed(0);
+
+        console.log(name, amount);
+
+        clone.querySelector('.brand').textContent = `${name}`;
+
+        for (let step = 0; step < amount; step++) {
+            clone.querySelector('.kegNr').textContent += " " + "\u25CF";
+        }
+        // const thisTap = clone.querySelector('.tap_info');
+        // const tapColor = tap.inUse ? 'lightgreen' : 'grey';
+        // thisTap.style.backgroundColor = `${tapColor}`;
+        // clone.querySelector('.level').textContent = `is at ${level}%`;
+        // thisTap.style.width = `${level}%`;
+
+        qs("#storage_display").appendChild(clone);
+    })
 }
 
 
