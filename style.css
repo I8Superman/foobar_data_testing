@@ -49,6 +49,7 @@ main {
     grid-area       : 2/1/3/3;
     display         : flex;
     justify-content : space-between;
+    position        : relative;
 }
 
 .bartender {
@@ -60,6 +61,13 @@ main {
 .bartender>* {
     margin-top   : 1rem;
     margin-bottom: 1rem;
+}
+
+#timer {
+    position : absolute;
+    font-size: 3rem;
+    left     : 55vw;
+    top      : -7vh;
 }
 
 #taps {

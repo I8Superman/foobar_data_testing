@@ -4,8 +4,12 @@ console.log('js runz');
 const qs = (s) => document.querySelector(s);
 const qsA = (s) => document.querySelectorAll(s);
 
-function run() { // Sets the interval of the data refresh
+function manual() { // Sets the interval of the data refresh
+    getAll();
+}
 
+function automatic(seconds) {
+    setInterval(getAll, seconds * 1000);
 }
 
 function getAll() {
@@ -24,6 +28,7 @@ function getAll() {
             updateBartenders(data.bartenders);
             updateTaps(data.taps);
             updateStorage(data.storage);
+            updateTimer(data.timestamp);
             //translateDates(data);
         });
 };
@@ -125,28 +130,30 @@ function updateStorage(storage) {
 
         const name = beer.name;
         const amount = beer.amount;
-        // const id = tap.id; // So there is no 'tap 0'
-        // const brand = tap.beer;
-        // const inUse = tap.inUse;
-        // const level = ((tap.level / tap.capacity) * 100).toFixed(0);
 
-        console.log(name, amount);
+        //console.log(name, amount);
 
         clone.querySelector('.brand').textContent = `${name}`;
 
         for (let step = 0; step < amount; step++) {
             clone.querySelector('.kegNr').textContent += " " + "\u25CF";
         }
-        // const thisTap = clone.querySelector('.tap_info');
-        // const tapColor = tap.inUse ? 'lightgreen' : 'grey';
-        // thisTap.style.backgroundColor = `${tapColor}`;
-        // clone.querySelector('.level').textContent = `is at ${level}%`;
-        // thisTap.style.width = `${level}%`;
-
         qs("#storage_display").appendChild(clone);
     })
 }
 
+function updateTimer(time) {
+    console.log(time)
+
+    const toString = new Date(time);
+    const h = toString.getHours().toString();
+    const m = toString.getMinutes().toString();
+    const s = toString.getSeconds().toString();
+
+    const clock = qs('#timer');
+    console.log(clock)
+    clock.textContent = `${h}:${m}:${s}`;
+}
 
 function getBeers() {
     fetch("https://foobearz.herokuapp.com/beertypes", {
