@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATE TEST</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main>
+        <div class="container" id="queue">QUEUE
+            <div id="order_display">
+                <!-- order template goes here -->
+            </div>
+        </div>
+
+        <template class="order">
+            <section class="details">
+                <div class="id"></div>
+                <div class="time"></div>
+                <div class="beers"></div>
+            </section>
+        </template>
+
+        <div class="container" id="serving">SERVING
+            <div id="serving_display">
+                <!-- serving template goes here -->
+            </div>
+        </div>
+
+        <template class="serving">
+            <section class="details">
+                <div class="id"></div>
+                <div class="time"></div>
+                <div class="beers"></div>
+            </section>
+        </template>
+
+        <div class="container" id="bartenders">BARTENDERS
+            <div class="bartender">Jonas
+                <div class="status"></div>
+                <div class="doing"></div>
+                <div class="usingTap"></div>
+                <div class="servingCustomer"></div>
+            </div>
+            <div class="bartender">Dannie
+                <div class="status"></div>
+                <div class="doing"></div>
+                <div class="usingTap"></div>
+                <div class="servingCustomer"></div>
+            </div>
+            <div class="bartender">Peter
+                <div class="status"></div>
+                <div class="doing"></div>
+                <div class="usingTap"></div>
+                <div class="servingCustomer"></div>
+            </div>
+        </div>
+        <div class="container" id="taps">TAPS
+            <template class="tap">
+                <div class="beer"></div>
+                <div class="inUse"></div>
+                <div class="level"></div>
+            </template>
+        </div>
+        <div class="container" id="storage">STORAGE
+            <template class="storage">
+                <div class="brand"></div>
+                <div class="kegNr"></div>
+            </template>
+        </div>
+    </main>
+    <!-- Queue: id, order time and how many of which beers -->
+
+    <!-- Serving: id, serve time (time to complete), how many of which beers -->
+
+    <!-- Bartenders: Name, status, doing right now (statusDetail), usingTap, handling order # -->
+
+    <!-- taps: beet type, show in use/not in use, level in % -->
+
+    <!-- storage: beertype and kegs left -->
+
+
+    <script src="index.js"></script>
+</body>
+
+</html>
