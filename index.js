@@ -1,9 +1,10 @@
 "use strict"
 console.log('This is a test of the data for the FooBar assignment');
-console.log('In the console, run the function manual() to update the data at any given time (the data will still change in realtime on the server).');
-console.log('Run automatic(x) to make the site auto-update every x seconds');
 console.log('Every fetch is a "snapshot" of how the evolving data looks at the time of fetching');
 console.log('NOTE: every update fetches and display ALL the data all over again, so you machine may start boiling :)');
+console.log('In the console, run the function manual() to update the data at any given time (the data will still change in realtime on the server).');
+console.log('Run automatic(x) to make the site auto-update every x seconds');
+console.log('Run order(beer, amount) to add an order to the queue. The beer must be put in quotes')
 
 const qs = (s) => document.querySelector(s);
 const qsA = (s) => document.querySelectorAll(s);
@@ -49,11 +50,12 @@ function updateQueue(queue) {
         const time = new Date(order.startTime);
         const hour = time.getHours();
         const mins = time.getMinutes();
+        const secs = time.getSeconds();
         const content = order.order;
         //console.log(id, hour, mins, content);
 
         clone.querySelector('.id').textContent = `#${id.toString()}  `;
-        clone.querySelector('.time').textContent = `${hour}:${mins}  `;
+        clone.querySelector('.time').textContent = `${hour}:${mins}:${secs}  `;
         clone.querySelector('.beers').textContent = content;
         qs("#order_display").appendChild(clone);
     });
@@ -70,11 +72,12 @@ function updateServing(serving) {
         const time = new Date(order.startTime);
         const hour = time.getHours();
         const mins = time.getMinutes();
+        const secs = time.getSeconds();
         const content = order.order;
         //console.log(id, hour, mins, content);
 
         clone.querySelector('.id').textContent = `#${id.toString()}  `;
-        clone.querySelector('.time').textContent = `${hour}:${mins}  `;
+        clone.querySelector('.time').textContent = `${hour}:${mins}:${secs}  `;
         clone.querySelector('.beers').textContent = content;
         qs("#serving_display").appendChild(clone);
     });
@@ -175,9 +178,9 @@ function getBeers() {
         });
 };
 
-function postOrder() {
+function order(beer, amount) {
     const data = [
-        { name: "Hoppily Ever After", amount: 10 }
+        { name: beer, amount: amount },
     ];
 
     const postData = JSON.stringify(data); // The data is converted to a JSON string (because the content type we send should be JSON)
@@ -192,12 +195,10 @@ function postOrder() {
         .then(res => res.json())
         .then((dataPost) => {
             console.log(dataPost)
-            getAll();
         });
 }
 
 function translateDates(data) {
-
 
     const realTime = new Date(data.timestamp); // Translate timestamp to normal date and time
     //console.log('Overall time (realtime): ' + realTime);
