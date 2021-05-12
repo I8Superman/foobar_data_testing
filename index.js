@@ -1,5 +1,9 @@
 "use strict"
-console.log('js runz');
+console.log('This is a test of the data for the FooBar assignment');
+console.log('In the console, run the function manual() to update the data at any given time (the data will still change in realtime on the server).');
+console.log('Run automatic(x) to make the site auto-update every x seconds');
+console.log('Every fetch is a "snapshot" of how the evolving data looks at the time of fetching');
+console.log('NOTE: every update fetches and display ALL the data all over again, so you machine may start boiling :)');
 
 const qs = (s) => document.querySelector(s);
 const qsA = (s) => document.querySelectorAll(s);
@@ -22,7 +26,7 @@ function getAll() {
     })
         .then(res => res.json())
         .then((data) => {
-            console.log('All data:', data);
+            //console.log('All data:', data);
             updateQueue(data.queue);
             updateServing(data.serving);
             updateBartenders(data.bartenders);
@@ -143,7 +147,7 @@ function updateStorage(storage) {
 }
 
 function updateTimer(time) {
-    console.log(time)
+    //console.log(time)
 
     const toString = new Date(time);
     const h = toString.getHours().toString();
@@ -151,7 +155,7 @@ function updateTimer(time) {
     const s = toString.getSeconds().toString();
 
     const clock = qs('#timer');
-    console.log(clock)
+    //console.log(clock)
     clock.textContent = `${h}:${m}:${s}`;
 }
 
